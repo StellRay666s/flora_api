@@ -1,6 +1,7 @@
 import { HookContext, HooksObject } from "@feathersjs/feathers";
 import * as authentication from "@feathersjs/authentication";
-// Don't remove this comment. It's needed to format import lines nicely.
+
+import { cartPositionsToProducts } from "./hooks/cartPositionsToProducts";
 
 const { authenticate } = authentication.hooks;
 
@@ -19,14 +20,8 @@ export default {
     all: [],
     find: [
       async (ctx: HookContext) => {
-        const newData = await ctx.result.data.map(async resultItem => {
-          const product = await ctx.app.service("bouquets").get(resultItem.productId);
-          return { product, _id: resultItem._id, count: resultItem.count };
-        });
-        await Promise.all(newData).then(data => {
-          ctx.result.data = data;
-          return ctx;
-        });
+        const newCtx = cartPositionsToProducts(ctx);
+        return newCtx;
       },
     ],
     get: [],
