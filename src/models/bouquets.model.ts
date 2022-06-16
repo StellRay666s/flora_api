@@ -18,6 +18,7 @@ export default function (app: Application): Model<any> {
       price: { type: Number, required: true },
       width: { type: Number, required: true },
       height: { type: Number, required: true },
+      rating: { type: Number, required: true },
     },
     {
       timestamps: true,
