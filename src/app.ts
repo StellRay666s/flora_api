@@ -33,13 +33,8 @@ app.use(
     contentSecurityPolicy: false,
   })
 );
-app.use(
-  bodyParser.urlencoded({
-    parameterLimit: 100000,
-    limit: "50mb",
-    extended: true,
-  })
-);
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
 app.use(compress());
 app.use(express.json());
