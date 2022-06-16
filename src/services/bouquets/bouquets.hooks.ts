@@ -1,4 +1,6 @@
-import { HooksObject } from "@feathersjs/feathers";
+import { HookContext, HooksObject } from "@feathersjs/feathers";
+
+import { isNew } from "./hooks/isNew";
 
 export default {
   before: {
@@ -13,7 +15,12 @@ export default {
 
   after: {
     all: [],
-    find: [],
+    find: [
+      (ctx: HookContext) => {
+        const newCtx = isNew(ctx);
+        return newCtx;
+      },
+    ],
     get: [],
     create: [],
     update: [],
