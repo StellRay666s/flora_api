@@ -1,8 +1,11 @@
-const { authenticate } = require("@feathersjs/authentication").hooks;
+import * as feathersAuthentication from "@feathersjs/authentication";
+import * as local from "@feathersjs/authentication-local";
+// Don't remove this comment. It's needed to format import lines nicely.
 
-const { hashPassword, protect } = require("@feathersjs/authentication-local").hooks;
+const { authenticate } = feathersAuthentication.hooks;
+const { hashPassword, protect } = local.hooks;
 
-module.exports = {
+export default {
   before: {
     all: [],
     find: [authenticate("jwt")],
