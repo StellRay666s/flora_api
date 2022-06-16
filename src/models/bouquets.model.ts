@@ -11,7 +11,13 @@ export default function (app: Application): Model<any> {
   const { Schema } = mongooseClient;
   const schema = new Schema(
     {
-      text: { type: String, required: true },
+      title: { type: String, required: true },
+      image: { type: String, required: true },
+      subTitle: { type: String, required: true },
+      description: { type: String, required: true },
+      price: { type: Number, required: true },
+      width: { type: Number, required: true },
+      height: { type: Number, required: true },
     },
     {
       timestamps: true,
