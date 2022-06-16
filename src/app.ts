@@ -9,6 +9,8 @@ import configuration from "@feathersjs/configuration";
 import express from "@feathersjs/express";
 import socketio from "@feathersjs/socketio";
 
+import bodyParser from "body-parser";
+
 import { Application } from "./declarations";
 import logger from "./logger";
 import middleware from "./middleware";
@@ -31,6 +33,8 @@ app.use(
     contentSecurityPolicy: false,
   })
 );
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(cors());
 app.use(compress());
 app.use(express.json());
