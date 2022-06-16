@@ -1,6 +1,6 @@
 import { HookContext } from "@feathersjs/feathers";
 
-async function isNew(ctx: HookContext) {
+async function addIsNew(ctx: HookContext) {
   ctx.result.data = ctx.result.data.map((resultItem: any) => {
     const msLimit: number = 43200000;
     return {
@@ -11,4 +11,4 @@ async function isNew(ctx: HookContext) {
   return ctx;
 }
 
-export { isNew };
+export { addIsNew };

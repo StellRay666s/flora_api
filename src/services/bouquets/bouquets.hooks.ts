@@ -1,6 +1,7 @@
 import { HookContext, HooksObject } from "@feathersjs/feathers";
 
-import { isNew } from "./hooks/isNew";
+import { addIsNew } from "./hooks/addIsNew";
+import { addBonuses } from "./hooks/addBonuses";
 
 export default {
   before: {
@@ -16,12 +17,17 @@ export default {
   after: {
     all: [],
     find: [
-      (ctx: HookContext) => {
-        const newCtx = isNew(ctx);
+      async (ctx: HookContext) => {
+        const newCtx = await addIsNew(ctx);
         return newCtx;
       },
     ],
-    get: [],
+    get: [
+      async (ctx: HookContext) => {
+        const newCtx = await addBonuses(ctx);
+        return newCtx;
+      },
+    ],
     create: [],
     update: [],
     patch: [],
