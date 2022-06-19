@@ -2,10 +2,11 @@ import { Application } from "../declarations";
 import users from "./users/users.service";
 import bouquets from "./bouquets/bouquets.service";
 import cart from "./cart/cart.service";
-// Don't remove this comment. It's needed to format import lines nicely.
+import orders from "./orders/orders.service";
 
 export default function (app: Application): void {
   app.configure(users);
   app.configure(bouquets);
   app.configure(cart);
+  app.configure(orders);
 }
