@@ -12,7 +12,7 @@ export default function (app: Application): Model<any> {
   const schema = new Schema(
     {
       productId: { type: String, required: true },
-      userId: { type: String, required: true },
+      userId: { type: String, required: false },
       count: { type: Number, required: true },
     },
     {
