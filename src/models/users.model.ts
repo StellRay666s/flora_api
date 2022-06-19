@@ -12,6 +12,9 @@ export default function (app: Application): Model<any> {
     {
       email: { type: String, unique: true, lowercase: true },
       password: { type: String },
+      address: { type: String },
+      phone: { type: String },
+      name: { type: String },
     },
     {
       timestamps: true,
