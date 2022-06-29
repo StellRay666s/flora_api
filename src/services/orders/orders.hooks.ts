@@ -1,6 +1,7 @@
-import { HooksObject } from "@feathersjs/feathers";
+import { HookContext, HooksObject } from "@feathersjs/feathers";
 import * as authentication from "@feathersjs/authentication";
-// Don't remove this comment. It's needed to format import lines nicely.
+
+import { removeCartAfterCreateOrder } from "./hooks/removeCartAfterCreateOrder";
 
 const { authenticate } = authentication.hooks;
 
@@ -19,7 +20,12 @@ export default {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [
+      async (ctx: HookContext) => {
+        ctx = await removeCartAfterCreateOrder(ctx);
+        return ctx;
+      },
+    ],
     update: [],
     patch: [],
     remove: [],
