@@ -2,15 +2,27 @@ import { HookContext, HooksObject } from "@feathersjs/feathers";
 import * as authentication from "@feathersjs/authentication";
 
 import { removeCartAfterCreateOrder } from "./hooks/removeCartAfterCreateOrder";
+import { findOnlyUserOrders } from "./hooks/findOnlyUserOrders";
+import { autoAddUserId } from "./hooks/autoAddUserId";
 
 const { authenticate } = authentication.hooks;
 
 export default {
   before: {
     all: [authenticate("jwt")],
-    find: [],
+    find: [
+      async (ctx: HookContext) => {
+        ctx = await findOnlyUserOrders(ctx);
+        return ctx;
+      },
+    ],
     get: [],
-    create: [],
+    create: [
+      async (ctx: HookContext) => {
+        ctx = await autoAddUserId(ctx);
+        return ctx;
+      },
+    ],
     update: [],
     patch: [],
     remove: [],

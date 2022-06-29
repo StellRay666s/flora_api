@@ -11,6 +11,7 @@ export default function (app: Application): Model<any> {
       address: { type: String, required: true },
       paymentMethod: { type: String, required: true },
       products: { type: [{ count: Number, id: String }], required: true },
+      userId: { type: String, required: false },
     },
     {
       timestamps: true,
