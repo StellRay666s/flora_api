@@ -4,6 +4,7 @@ import * as authentication from "@feathersjs/authentication";
 import { removeCartAfterCreateOrder } from "./hooks/removeCartAfterCreateOrder";
 import { findOnlyUserOrders } from "./hooks/findOnlyUserOrders";
 import { autoAddUserId } from "./hooks/autoAddUserId";
+import { orderProductsPositionsToProducts } from "./hooks/orderProductsPositionsToProducts";
 
 const { authenticate } = authentication.hooks;
 
@@ -30,7 +31,12 @@ export default {
 
   after: {
     all: [],
-    find: [],
+    find: [
+      async (ctx: HookContext) => {
+        await orderProductsPositionsToProducts(ctx);
+        return ctx;
+      },
+    ],
     get: [],
     create: [
       async (ctx: HookContext) => {
