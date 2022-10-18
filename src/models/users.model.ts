@@ -15,6 +15,7 @@ export default function (app: Application): Model<any> {
       address: { type: String },
       phone: { type: String },
       name: { type: String },
+      role: { type: String },
     },
     {
       timestamps: true,
